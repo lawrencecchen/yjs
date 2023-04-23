@@ -76,7 +76,7 @@ export class YMap extends AbstractType {
   _integrate (y, item) {
     super._integrate(y, item)
     ;/** @type {Map<string, any>} */ (this._prelimContent).forEach((value, key) => {
-      this.set(key, value)
+      this.set(/** @type {any} */ (key), value)
     })
     this._prelimContent = null
   }
@@ -97,7 +97,7 @@ export class YMap extends AbstractType {
      */
     const map = new YMap()
     this.forEach((value, key) => {
-      map.set(key, value instanceof AbstractType ? /** @type {typeof value} */ (value.clone()) : value)
+      map.set(/** @type {any} */ (key), value instanceof AbstractType ? /** @type {typeof value} */ (value.clone()) : /** @type {any} */ (value))
     })
     return map
   }
@@ -204,19 +204,19 @@ export class YMap extends AbstractType {
     }
   }
 
-  /**
+   /**
    * Adds or updates an element with a specified key and value.
    *
-   * @param {string} key The key of the element to add to this YMap
-   * @param {MapType} value The value of the element to add
+   * @param {keyof MapType} key The key of the element to add to this YMap
+   * @param {MapType[key]} value The value of the element to add
    */
   set (key, value) {
     if (this.doc !== null) {
       transact(this.doc, transaction => {
-        typeMapSet(transaction, this, key, /** @type {any} */ (value))
+        typeMapSet(transaction, this, /** @type {any} */ (key), /** @type {any} */ (value))
       })
     } else {
-      /** @type {Map<string, any>} */ (this._prelimContent).set(key, value)
+      /** @type {Map<string, any>} */ (this._prelimContent).set(/** @type {any} */ (key), value)
     }
     return value
   }
@@ -224,11 +224,11 @@ export class YMap extends AbstractType {
   /**
    * Returns a specified element from this YMap.
    *
-   * @param {string} key
+   * @param {keyof MapType} key
    * @return {MapType[key]}
    */
   get (key) {
-    return /** @type {any} */ (typeMapGet(this, key))
+    return /** @type {any} */ (typeMapGet(this, /** @type {any} */ (key)))
   }
 
   /**
