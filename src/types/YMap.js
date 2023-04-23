@@ -225,7 +225,7 @@ export class YMap extends AbstractType {
    * Returns a specified element from this YMap.
    *
    * @param {string} key
-   * @return {MapType|undefined}
+   * @return {MapType[key]}
    */
   get (key) {
     return /** @type {any} */ (typeMapGet(this, key))
