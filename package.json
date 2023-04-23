@@ -1,6 +1,6 @@
 {
-  "name": "lawrenceyjs",
-  "version": "13.6.1",
+  "name": "yjs",
+  "version": "13.6.0",
   "description": "Shared Editing Library",
   "main": "./dist/yjs.cjs",
   "module": "./dist/yjs.mjs",
